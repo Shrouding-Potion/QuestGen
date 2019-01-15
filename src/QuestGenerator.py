@@ -92,8 +92,3 @@ class QuestGenerator:
             tmp = node.lchild
             node.lchild = node.rchild
             node.rchild = tmp
-
-
-if __name__ == '__main__':
-    g = QuestGenerator()
-    g.generate(quantity=18, operators=9, enable_power=False)
