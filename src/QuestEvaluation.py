@@ -1,6 +1,11 @@
+from fractions import Fraction
+from math import gcd
+
 class Evaluation:
 
     prior = {'+':0, '-':0, '*':1, '/':1, '^':2}
+    numberator = 1
+    denominator = 1
 
     def getvalue(self, num1, num2, operator):
         if operator == "+":
@@ -10,7 +15,15 @@ class Evaluation:
         elif operator == "*":
             return num1 * num2
         elif operator == "/":
-            return num1 / num2
+            divisor = gcd(num1, num2)
+            if num2 == 1:
+                return num1
+            elif divisor != num2:
+                self.numberator *= int(num1/divisor)
+                self.denominator *= int(num2/divisor)
+                return False
+            else:
+                return num1 / num2
         elif operator == "^":
             return pow(num1, num2)
 
@@ -18,7 +31,9 @@ class Evaluation:
         operator = opt.pop()
         num2 = data.pop()
         num1 = data.pop()
-        data.append(self.getvalue(num1, num2, operator))
+        num3 = self.getvalue(num1, num2, operator)
+        if num3:
+            data.append(num3)
 
     def Caculator(self):
         r = open("QuestGen\\src\\solve-me.txt", 'r', encoding = 'UTF-8')
@@ -27,6 +42,8 @@ class Evaluation:
             opt = []
             data = []
             i = 0
+            self.denominator = 1
+            self.numberator = 1
             while i < len(line):
                 if line[i] == ' ' or line[i] == '\n':
                     pass
@@ -52,11 +69,16 @@ class Evaluation:
                 i += 1
             while opt:
                 self.process(data, opt)
-            print('{:g}'.format(data.pop()))
+            
+            if self.numberator == 1 and self.denominator == 1:
+                print('{:g}'.format(data.pop()))
+            else:
+                if data:
+                    self.numberator *= data.pop()
+                print (Fraction(self.numberator, self.denominator))
 
         r.close()
                     
 if __name__ == '__main__':
    A = Evaluation()
    A.Caculator()
-   
