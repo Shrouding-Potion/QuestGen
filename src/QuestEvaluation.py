@@ -3,11 +3,12 @@ from math import gcd
 
 class Evaluation:
 
-    prior = {'+':0, '-':0, '*':1, '/':1, '^':2}
-    numberator = 1
-    denominator = 1
+    prior = {'+':0, '-':0, '*':1, '/':1, '^':2} #算符优先级表
+    numberator = 1 #公共分子
+    denominator = 1 #公共分母
 
     def getvalue(self, num1, num2, operator):
+        # 获取运算结果
         if operator == "+":
             return num1 + num2
         elif operator == "-":
@@ -18,7 +19,7 @@ class Evaluation:
             divisor = gcd(num1, num2)
             if num2 == 1:
                 return num1
-            elif divisor != num2:
+            elif divisor != num2:   #如果不能整除即最大公约数不为分母，则将他们转化为分子分母，并取消本次结果
                 self.numberator *= int(num1/divisor)
                 self.denominator *= int(num2/divisor)
                 return False
@@ -36,6 +37,7 @@ class Evaluation:
             data.append(num3)
 
     def Caculator(self):
+        # 中缀表达式转换为后缀表达式的过程中同时计算结果
         r = open("QuestGen\\src\\solve-me.txt", 'r', encoding = 'UTF-8')
         lines = r.readlines()
         for line in lines:
@@ -71,7 +73,7 @@ class Evaluation:
                 self.process(data, opt)
             
             if self.numberator == 1 and self.denominator == 1:
-                print('{:g}'.format(data.pop()))
+                print ('{:g}'.format(data.pop()))
             else:
                 if data:
                     self.numberator *= data.pop()
