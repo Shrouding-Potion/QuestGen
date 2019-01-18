@@ -1,4 +1,5 @@
 import QuestGenerator as Qg
+import Evaluator
 import sys
 import getopt
 
@@ -35,6 +36,9 @@ if __name__ == '__main__':
 
     g = Qg.QuestGenerator()
     g.generate(quantity=num, operators=operators, enable_power=exp)
+    ev = Evaluator.Evaluator()
+    print(ev.evaluate(g.output_list[0]))
+
     with open('out.txt', 'w', encoding='utf-8') as f:
         for out in g.output_list:
             f.write(out.to_string() + '\n')

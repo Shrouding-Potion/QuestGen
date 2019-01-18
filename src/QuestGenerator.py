@@ -26,6 +26,12 @@ class BiTree:
             elif self.val in (4,):
                 self.this_level = 4  # ** 4级
 
+    def set_lchild(self, lchild):
+        self.lchild = lchild
+
+    def set_rchild(self, rchild):
+        self.rchild = rchild
+
     def set_children(self, lchild, rchild=None):
         self.lchild = lchild
         if rchild:
@@ -50,17 +56,17 @@ class QuestGenerator:
 
     def generate(self, quantity=1, operators=7, enable_power=False):
         for loop in range(quantity):
-            nums = [BiTree(0, x) for x in range(operators + 1)]
+            nums = [BiTree(0, x) for x in range(1, operators + 2)]
             ops = [BiTree(1, random.randint(0, len(BiTree.operators) - 2 + enable_power)) for _ in range(operators)]
             unfilled_ops = ops[:]
             filled_ops = nums[:]
 
             while len(unfilled_ops):
                 i = random.randint(0, len(filled_ops) - 1)
-                unfilled_ops[0].set_children(filled_ops[i], filled_ops[i])
+                unfilled_ops[0].set_lchild(filled_ops[i])
                 filled_ops.pop(i)
                 i = random.randint(0, len(filled_ops) - 1)
-                unfilled_ops[0].set_children(filled_ops[i])
+                unfilled_ops[0].set_rchild(filled_ops[i])
                 filled_ops.pop(i)
 
                 filled_ops.append(unfilled_ops[0])
@@ -70,6 +76,12 @@ class QuestGenerator:
                 continue
             self.output_list.append(filled_ops[-1])
             print(self.output_list[-1].to_string())
+
+    def gen_simple_divisor(self) -> BiTree:
+        pass
+
+    def gen_simple_power(self) -> BiTree:
+        pass
 
     def deduplicate(self, root: BiTree):
         # 深拷贝 - 避免破坏原有的随机顺序
