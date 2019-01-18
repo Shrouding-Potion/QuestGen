@@ -1,6 +1,6 @@
 class Evaluation:
 
-    prior = {'+':0, '-':0, '*':1, '/':1}
+    prior = {'+':0, '-':0, '*':1, '/':1, '^':2}
 
     def getvalue(self, num1, num2, operator):
         if operator == "+":
@@ -11,6 +11,8 @@ class Evaluation:
             return num1 * num2
         elif operator == "/":
             return num1 / num2
+        elif operator == "^":
+            return pow(num1, num2)
 
     def process(self, data, opt):
         operator = opt.pop()
@@ -19,7 +21,7 @@ class Evaluation:
         data.append(self.getvalue(num1, num2, operator))
 
     def Caculator(self):
-        r = open("solve-me.txt", "r", encoding = 'utf8')
+        r = open("QuestGen\\src\\solve-me.txt", 'r', encoding = 'UTF-8')
         lines = r.readlines()
         for line in lines:
             opt = []
@@ -51,6 +53,8 @@ class Evaluation:
             while opt:
                 self.process(data, opt)
             print('{:g}'.format(data.pop()))
+
+        r.close()
                     
 if __name__ == '__main__':
    A = Evaluation()
