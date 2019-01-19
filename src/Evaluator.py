@@ -1,4 +1,4 @@
-from QuestGenerator import BiTree
+from BiTree import BiTree
 from fractions import Fraction
 
 
@@ -17,4 +17,6 @@ class Evaluator:
                 return self.evaluate(node.lchild) * self.evaluate(node.rchild)
             if node.val == 3:
                 return self.evaluate(node.lchild) / self.evaluate(node.rchild)
+            if node.val == 4:
+                return self.evaluate(node.lchild) ** self.evaluate(node.rchild)
         return Fraction(node.val)
