@@ -4,8 +4,6 @@ from math import gcd
 class Evaluation:
 
     prior = {'+':0, '-':0, '*':1, '/':1, '^':2} #算符优先级表
-    numberator = 1 #公共分子
-    denominator = 1 #公共分母
 
     def getvalue(self, num1, num2, operator):
         # 获取运算结果
@@ -16,15 +14,7 @@ class Evaluation:
         elif operator == "*":
             return num1 * num2
         elif operator == "/":
-            divisor = gcd(num1, num2)
-            if num2 == 1:
-                return num1
-            elif divisor != num2:   #如果不能整除即最大公约数不为分母，则将他们转化为分子分母，并取消本次结果
-                self.numberator *= int(num1/divisor)
-                self.denominator *= int(num2/divisor)
-                return False
-            else:
-                return num1 / num2
+            return Fraction(num1, num2)
         elif operator == "^":
             return pow(num1, num2)
 
@@ -44,8 +34,6 @@ class Evaluation:
             opt = []
             data = []
             i = 0
-            self.denominator = 1
-            self.numberator = 1
             while i < len(line):
                 if line[i] == ' ' or line[i] == '\n':
                     pass
@@ -71,13 +59,8 @@ class Evaluation:
                 i += 1
             while opt:
                 self.process(data, opt)
-            
-            if self.numberator == 1 and self.denominator == 1:
-                print ('{:g}'.format(data.pop()))
-            else:
-                if data:
-                    self.numberator *= data.pop()
-                print (Fraction(self.numberator, self.denominator))
+        
+            print (data.pop())
 
         r.close()
                     
