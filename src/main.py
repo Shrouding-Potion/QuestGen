@@ -11,8 +11,9 @@ USAGE = '''
     -n, num of expressions to generate (default: 4), 生成表达式数量
     -l, num of operators in each expression (default: 4), 每个表达式的算符数
     -e, enable Exponential Operator, 允许指数算符
-    -^, Exponential Operator print as '^' rather than '**', 
-        指数算符输出为 '^', 而不是'**'
+    -p, Exponential Operator print as '^' rather than '**', 
+        指数算符输出为 '^', 而不是'**'3
+    -v, verbose output, 冗长输出 - 打印将写入的题目和答案
 '''
 
 if __name__ == '__main__':
@@ -23,7 +24,7 @@ if __name__ == '__main__':
 
     # 解析参数
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hn:l:ev^")
+        opts, args = getopt.getopt(sys.argv[1:], "hn:l:evp")
     except getopt.GetoptError as e:
         print('\n  ' + e.msg + '\n')
         exit(21)
@@ -40,7 +41,7 @@ if __name__ == '__main__':
                 exp = True
             elif op == '-v':
                 verbose = True
-            elif op == '-^':
+            elif op == '-p':
                 BiTree.set_power_operator(True)
 
     g = Qg.QuestGenerator()
