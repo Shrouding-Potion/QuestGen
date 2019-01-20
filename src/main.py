@@ -14,6 +14,7 @@ USAGE = '''
     -p, Exponential Operator print as '^' rather than '**', 
         指数算符输出为 '^', 而不是'**'3
     -v, verbose output, 冗长输出 - 打印将写入的题目和答案
+    -i, interactive mode, 交互模式，允许用户输入答案并得到正误统计
 '''
 
 if __name__ == '__main__':
@@ -21,10 +22,11 @@ if __name__ == '__main__':
     operators = 4
     exp = False
     verbose = False
+    interact = False
 
     # 解析参数
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hn:l:evp")
+        opts, args = getopt.getopt(sys.argv[1:], "hn:l:epvi")
     except getopt.GetoptError as e:
         print('\n  ' + e.msg + '\n')
         exit(21)
@@ -39,10 +41,12 @@ if __name__ == '__main__':
                 operators = int(value)
             elif op == '-e':
                 exp = True
-            elif op == '-v':
-                verbose = True
             elif op == '-p':
                 BiTree.set_power_operator(True)
+            elif op == '-v':
+                verbose = True
+            elif op == '-i':
+                interact = True
 
     g = Qg.QuestGenerator()
     g.generate(quantity=num, operators=operators, enable_power=exp)
@@ -63,5 +67,18 @@ if __name__ == '__main__':
     with open('solutions.txt', 'w', encoding='utf-8') as f:
         for out in g.output_list:
             f.write(str(ev.evaluate(out)) + '\n')
-
     print('\n  All work done')
+
+    # 交互模式
+    if interact:
+        correct = 0
+        wrone = 0
+
+        for out in g.output_list:
+            print(out.to_string())
+            answer = input('> ')
+            if answer == str(ev.evaluate(out)):
+                correct += 1
+            else:
+                wrone += 1
+        print('\n  Your Score:\n    AC: {} ({:.2})\n    WA: {}'.format(correct, correct / (correct + wrone), wrone))
