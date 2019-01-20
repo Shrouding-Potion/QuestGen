@@ -6,21 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>499</width>
-    <height>249</height>
+    <width>454</width>
+    <height>302</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>QuestGen - GUI</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>471</width>
-      <height>201</height>
+      <y>0</y>
+      <width>481</width>
+      <height>301</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -33,10 +33,10 @@
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>320</x>
         <y>20</y>
         <width>111</width>
-        <height>111</height>
+        <height>201</height>
        </rect>
       </property>
       <property name="title">
@@ -49,7 +49,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>60</y>
+         <y>90</y>
          <width>75</width>
          <height>21</height>
         </rect>
@@ -68,7 +68,40 @@
         </rect>
        </property>
        <property name="text">
-        <string>出题</string>
+        <string>下一题</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>75</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>提交</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>130</y>
+         <width>41</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>20s</string>
        </property>
       </widget>
      </widget>
@@ -78,7 +111,7 @@
         <x>10</x>
         <y>20</y>
         <width>281</width>
-        <height>141</height>
+        <height>201</height>
        </rect>
       </property>
       <property name="title">
@@ -88,8 +121,8 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>80</y>
-         <width>151</width>
+         <y>140</y>
+         <width>111</width>
          <height>41</height>
         </rect>
        </property>
@@ -101,7 +134,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>30</y>
+         <y>50</y>
          <width>261</width>
          <height>41</height>
         </rect>
@@ -110,12 +143,77 @@
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>54</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>题目：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>54</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>作答：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>150</y>
+         <width>151</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>提示文本</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
       <string>历史</string>
      </attribute>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>371</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <property name="rowCount">
+       <number>0</number>
+      </property>
+      <property name="columnCount">
+       <number>3</number>
+      </property>
+      <column/>
+      <column/>
+      <column/>
+     </widget>
     </widget>
    </widget>
   </widget>
