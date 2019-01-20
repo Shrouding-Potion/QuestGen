@@ -49,13 +49,6 @@ class QuestGenerator:
             if not self.deduplicate(filled[-1]):
                 continue
             self.output_list.append(filled[-1])
-            # print(self.output_list[-1].to_string())
-
-    def gen_simple_divisor(self) -> BiTree:
-        pass
-
-    def gen_simple_power(self) -> BiTree:
-        pass
 
     def deduplicate(self, root: BiTree):
         # 深拷贝 - 避免破坏原有的随机顺序
