@@ -12,7 +12,10 @@ class QuestGenerator:
         self.deduplicate_set = set()  # type: set[str]
 
     def generate(self, quantity=1, operators=7, enable_power=False):
-        for loop in range(quantity):
+        count = 0
+        for loop in range(quantity * 2):
+            if count >= quantity:
+                break
             nums = [BiTree(0, random.randint(0, self.UPPERCAP)) for _ in range(1, operators + 2)]
             ops = [BiTree(1, random.randint(0, len(BiTree.operators) - 2 + enable_power)) for _ in range(operators)]
             unfilled = ops[:]
@@ -46,9 +49,16 @@ class QuestGenerator:
                 filled.append(unfilled[0])
                 unfilled.pop(0)
 
+            # 去重
             if not self.deduplicate(filled[-1]):
                 continue
+            # 检查除数为0
+            try:
+                ev.evaluate(filled[-1])
+            except ZeroDivisionError:
+                continue
             self.output_list.append(filled[-1])
+            count += 1
 
     def deduplicate(self, root: BiTree):
         # 深拷贝 - 避免破坏原有的随机顺序
