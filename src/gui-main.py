@@ -47,7 +47,7 @@ class MyWindow(QMainWindow, mainwnd.Ui_MainWindow):
             self.label_4.setText('{}s'.format(self.remaining))
 
         # 产生新题目
-        self.g.generate(quantity=1, operators=2, enable_power=False)
+        self.g.generate(quantity=1, operators=self.spinBox.value(), enable_power=False)
         self.line_quest.setText(self.g.output_list[-1].to_string())
         self.line_answer.setText('')
         self.timer.start(1000)
